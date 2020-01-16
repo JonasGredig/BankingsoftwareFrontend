@@ -9,6 +9,7 @@ import { AccountsComponent } from './accounts/accounts.component';
 import { TransactionMenuComponent } from './transaction-menu/transaction-menu.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { BankingToolbarComponent } from './banking-toolbar/banking-toolbar.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { BankingToolbarComponent } from './banking-toolbar/banking-toolbar.compo
     MatFormFieldModule,
     MatSelectModule,
     MatOptionModule,
-    MatToolbarModule
+    MatToolbarModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

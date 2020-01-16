@@ -1,4 +1,4 @@
-<div id="login">
+<div id="login" *ngIf="customers">
   <mat-card>
     <div>
       <mat-label>Wähle deinen Benutzer</mat-label>
@@ -6,7 +6,7 @@
     <mat-form-field>
       <mat-label>Select an option</mat-label>
       <mat-select>
-        <mat-option *ngFor="let customer of customerList"  value="option1">{{customer.firstname}} {{customer.lastname}}</mat-option>
+        <mat-option *ngFor="let customer of customers"  value="option1">{{customer.firstName}}</mat-option>
       </mat-select>
     </mat-form-field>
   </mat-card>

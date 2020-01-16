@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Customer} from '../model/customer';
+import {Customer} from '../shared/customer';
+import {RestApiService} from '../shared/rest-api.service';
 
 @Component({
   selector: 'app-select-user',
@@ -8,41 +9,19 @@ import {Customer} from '../model/customer';
 })
 export class SelectUserComponent implements OnInit {
 
-  customerList: Array<Customer> = [{
-    id: 1,
-    city: 'Zurich',
-    customerNumber: 1,
-    firstname: 'Jonas',
-    lastname: 'Gredig',
-    street: 'Mühli 1',
-    title: 'Herr',
-    zipcode: 7427
-  },
-    {
-      id: 2,
-      city: 'Bern',
-      customerNumber: 2,
-      firstname: 'Jonassss',
-      lastname: 'Grsedig',
-      street: 'Msühli 1',
-      title: 'Hserr',
-      zipcode: 7427
-    },
-    {
-      id: 3,
-      city: 'Zursdfsdfich',
-      customerNumber: 3,
-      firstname: 'Jonsdfas',
-      lastname: 'Gsdfsredig',
-      street: 'Mfdfsdfühli 1',
-      title: 'Hersr',
-      zipcode: 7427
-    }];
+  public customers: Customer[];
 
-  constructor() {
+  constructor(private restApi: RestApiService) {
+    this.getCustomers();
   }
 
   ngOnInit() {
+  }
+
+  // Get employees list
+  getCustomers() {
+    return this.restApi.getCustomers()
+      .subscribe(customers => this.customers = customers);
   }
 
 }
