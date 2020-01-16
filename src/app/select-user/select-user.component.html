@@ -1,13 +1,19 @@
-<div id="login" *ngIf="customers">
+<div class="bankingContent" *ngIf="customers">
   <mat-card>
     <div>
       <mat-label>Wähle deinen Benutzer</mat-label>
     </div>
-    <mat-form-field>
-      <mat-label>Select an option</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let customer of customers"  value="option1">{{customer.firstName}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div id="select">
+      <mat-form-field>
+        <mat-label>Benutzer</mat-label>
+        <mat-select [(value)]="selectedCustomerId">
+          <mat-option *ngFor="let customer of customers"
+                      value="{{customer.id}}">{{customer.firstName}} {{customer.lastName}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <a routerLink="/customer/{{selectedCustomerId}}">
+        <button mat-raised-button color="primary" id="button">Weiter</button>
+      </a>
+    </div>
   </mat-card>
 </div>

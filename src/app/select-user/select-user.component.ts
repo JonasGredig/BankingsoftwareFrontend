@@ -10,6 +10,7 @@ import {RestApiService} from '../shared/rest-api.service';
 export class SelectUserComponent implements OnInit {
 
   public customers: Customer[];
+  public selectedCustomerId: string;
 
   constructor(private restApi: RestApiService) {
     this.getCustomers();
@@ -18,7 +19,6 @@ export class SelectUserComponent implements OnInit {
   ngOnInit() {
   }
 
-  // Get employees list
   getCustomers() {
     return this.restApi.getCustomers()
       .subscribe(customers => this.customers = customers);

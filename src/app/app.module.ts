@@ -4,30 +4,43 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { SelectUserComponent } from './select-user/select-user.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatCardModule, MatFormFieldModule, MatOptionModule, MatSelectModule, MatToolbarModule} from '@angular/material';
-import { AccountsComponent } from './accounts/accounts.component';
-import { TransactionMenuComponent } from './transaction-menu/transaction-menu.component';
-import { WelcomeComponent } from './welcome/welcome.component';
+import {MatButtonModule, MatCardModule, MatFormFieldModule, MatOptionModule, MatSelectModule, MatToolbarModule} from '@angular/material';
+import { AccountsComponent } from './user-detail/accounts/accounts.component';
+import { WelcomeComponent } from './user-detail/welcome/welcome.component';
 import { BankingToolbarComponent } from './banking-toolbar/banking-toolbar.component';
 import {HttpClientModule} from '@angular/common/http';
+import { RouterModule, Routes } from '@angular/router';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
+import {MoneyTransferComponent} from './user-detail/money-transfer/money-transfer.component';
+
+const appRoutes: Routes = [
+  { path: '', component: SelectUserComponent },
+  { path: 'customer/:id', component: UserDetailComponent },
+  { path: '**', component: PageNotFoundComponent }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     SelectUserComponent,
     AccountsComponent,
-    TransactionMenuComponent,
     WelcomeComponent,
-    BankingToolbarComponent
+    BankingToolbarComponent,
+    PageNotFoundComponent,
+    UserDetailComponent,
+    MoneyTransferComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    RouterModule.forRoot(appRoutes),
     MatCardModule,
     MatFormFieldModule,
     MatSelectModule,
     MatOptionModule,
     MatToolbarModule,
+    MatButtonModule,
     HttpClientModule,
   ],
   providers: [],
