@@ -19,8 +19,6 @@ export class WelcomeComponent implements OnInit {
   }
 
   getCustomer() {
-    return this.restApi.getCustomer(1)
-      .subscribe(customer => this.customer = customer);
   }
 
 }

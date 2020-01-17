@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Customer } from '../shared/customer';
-import { Observable, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Customer} from '../shared/customer';
+import {Account} from '../shared/account';
+import {Observable, throwError} from 'rxjs';
+import {retry, catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class RestApiService {
   // Define API
   apiURL = 'http://localhost:8080/web_war_exploded/api';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   /*========================================
     CRUD Methods for consuming RESTful API
@@ -34,13 +36,14 @@ export class RestApiService {
       );
   }
 
-  getCustomer(customerId: number): Observable<Customer> {
-    return this.http.get<Customer>(this.apiURL + '/customer/' + customerId)
+  getAccount(customerId: number): Observable<Account[]> {
+    return this.http.get<Account[]>(this.apiURL + '/account/' + customerId)
       .pipe(
         retry(1),
         catchError(this.handleError)
       );
   }
+
 
   // Error handling
   handleError(error) {
