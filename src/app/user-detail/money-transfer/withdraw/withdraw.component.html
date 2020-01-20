@@ -1,8 +1,8 @@
 <mat-card>
-  <form class="example-form">
+  <form class="example-form" [formGroup]="withdrawForm" (ngSubmit)="submitTransaction()">
     <mat-form-field class="example-full-width">
       <mat-label>Konto auswählen</mat-label>
-      <mat-select>
+      <mat-select [(value)]="newWithdraw.iban">
         <mat-option *ngFor="let account of accounts" [value]="account.iban">
           {{account.iban}}
         </mat-option>
@@ -10,10 +10,10 @@
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
-      <input matInput type="number" placeholder="Betrag CHF" value="0.00">
+      <input matInput type="number" placeholder="Betrag CHF" [valueAsNumber]="newWithdraw.amount" value="0.00">
     </mat-form-field>
 
-    <button mat-raised-button color="primary">Auszahlen</button>
+    <button mat-raised-button color="primary" type="submit">Auszahlen</button>
 
   </form>
 </mat-card>

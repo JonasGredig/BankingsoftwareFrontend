@@ -2,6 +2,7 @@ import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
 import {Account} from '../../shared/account';
 import {RestApiService} from '../../shared/rest-api.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 
 @Component({
@@ -16,12 +17,16 @@ export class AccountsComponent implements OnInit {
   public dataSource;
 
   constructor(private restApi: RestApiService,
-              private changeDetectorRefs: ChangeDetectorRef) {
+              private changeDetectorRefs: ChangeDetectorRef,
+              private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
+    let userId: number;
+    this.activatedRoute.queryParams.subscribe(params => userId = params['userId']);
+
     this.restApi
-      .getAccount(1)
+      .getAccounts(userId)
       .subscribe((accounts) => {
         this.accounts = accounts;
         this.displayedColumns = ['iban', 'balance', 'overdraft'];

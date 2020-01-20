@@ -3,7 +3,9 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Customer} from '../shared/customer';
 import {Account} from '../shared/account';
 import {Observable, throwError} from 'rxjs';
-import {retry, catchError} from 'rxjs/operators';
+import {retry, catchError, map} from 'rxjs/operators';
+import {Transaction} from './transaction';
+import {logger} from 'codelyzer/util/logger';
 
 @Injectable({
   providedIn: 'root'
@@ -36,13 +38,27 @@ export class RestApiService {
       );
   }
 
-  getAccount(customerId: number): Observable<Account[]> {
-    return this.http.get<Account[]>(this.apiURL + '/account/' + customerId)
+  getCustomer(userId: number): Observable<Customer> {
+    return this.http.get<Customer>(this.apiURL + '/customer/' + userId)
       .pipe(
         retry(1),
         catchError(this.handleError)
       );
   }
+
+
+  getAccounts(customerId: number): Observable<Account[]> {
+      return this.http.get<Account[]>(this.apiURL + '/account/' + customerId)
+        .pipe(
+          retry(1),
+          catchError(this.handleError)
+        );
+  }
+
+  addTransaction(transaction: Transaction): Observable<Transaction> {
+    return this.http.post<Transaction>(this.apiURL + '/transaction/new', transaction, this.httpOptions);
+  }
+
 
 
   // Error handling
@@ -55,8 +71,7 @@ export class RestApiService {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    window.alert(errorMessage);
+    console.log('HEy X ' + errorMessage);
     return throwError(errorMessage);
   }
-
 }

@@ -11,9 +11,7 @@
                       value="{{customer.id}}">{{customer.firstName}} {{customer.lastName}}</mat-option>
         </mat-select>
       </mat-form-field>
-      <a routerLink="/customer/{{selectedCustomerId}}">
-        <button mat-raised-button color="primary" id="button">Weiter</button>
-      </a>
+      <button *ngIf="selectedCustomerId != null" (click)="login()" mat-raised-button color="primary" id="button">Weiter</button>
     </div>
   </mat-card>
 </div>

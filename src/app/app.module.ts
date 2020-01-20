@@ -7,13 +7,15 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
   MatCardModule,
-  MatFormFieldModule, MatGridListModule,
+  MatFormFieldModule,
+  MatGridListModule,
+  MatInputModule,
   MatOptionModule,
   MatSelectModule,
   MatSidenavModule,
-  MatTableModule, MatTabsModule,
+  MatTableModule,
+  MatTabsModule,
   MatToolbarModule,
-  MatInputModule,
 } from '@angular/material';
 import {AccountsComponent} from './user-detail/accounts/accounts.component';
 import {WelcomeComponent} from './user-detail/welcome/welcome.component';
@@ -23,13 +25,16 @@ import {RouterModule, Routes} from '@angular/router';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {UserDetailComponent} from './user-detail/user-detail.component';
 import {MoneyTransferComponent} from './user-detail/money-transfer/money-transfer.component';
-import { DepositComponent } from './user-detail/money-transfer/deposit/deposit.component';
-import { WithdrawComponent } from './user-detail/money-transfer/withdraw/withdraw.component';
-import { PaymentComponent } from './user-detail/money-transfer/payment/payment.component';
+import {DepositComponent} from './user-detail/money-transfer/deposit/deposit.component';
+import {WithdrawComponent} from './user-detail/money-transfer/withdraw/withdraw.component';
+import {PaymentComponent} from './user-detail/money-transfer/payment/payment.component';
+import {StoreModule} from '@ngrx/store';
+import {ReactiveFormsModule} from '@angular/forms';
 
 const appRoutes: Routes = [
   {path: '', component: SelectUserComponent},
-  {path: 'customer/:id', component: UserDetailComponent},
+  {path: 'customer', component: SelectUserComponent},
+  {path: 'overview', component: UserDetailComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
 
@@ -63,6 +68,7 @@ const appRoutes: Routes = [
     MatGridListModule,
     MatTabsModule,
     MatInputModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
