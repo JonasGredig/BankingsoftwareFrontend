@@ -48,17 +48,18 @@ export class RestApiService {
 
 
   getAccounts(customerId: number): Observable<Account[]> {
-      return this.http.get<Account[]>(this.apiURL + '/account/' + customerId)
-        .pipe(
-          retry(1),
-          catchError(this.handleError)
-        );
+    return this.http.get<Account[]>(this.apiURL + '/account/' + customerId)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
   }
 
   addTransaction(transaction: Transaction): Observable<Transaction> {
-    return this.http.post<Transaction>(this.apiURL + '/transaction/new', transaction, this.httpOptions);
+    return this.http.post<Transaction>(this.apiURL + '/transaction/new', transaction, this.httpOptions).pipe(
+      retry(1),
+      catchError(this.handleError));
   }
-
 
 
   // Error handling
@@ -71,7 +72,7 @@ export class RestApiService {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    console.log('HEy X ' + errorMessage);
+
     return throwError(errorMessage);
   }
 }

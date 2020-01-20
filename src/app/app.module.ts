@@ -12,7 +12,7 @@ import {
   MatInputModule,
   MatOptionModule,
   MatSelectModule,
-  MatSidenavModule,
+  MatSidenavModule, MatSnackBarModule,
   MatTableModule,
   MatTabsModule,
   MatToolbarModule,
@@ -29,7 +29,7 @@ import {DepositComponent} from './user-detail/money-transfer/deposit/deposit.com
 import {WithdrawComponent} from './user-detail/money-transfer/withdraw/withdraw.component';
 import {PaymentComponent} from './user-detail/money-transfer/payment/payment.component';
 import {StoreModule} from '@ngrx/store';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 const appRoutes: Routes = [
   {path: '', component: SelectUserComponent},
@@ -69,6 +69,8 @@ const appRoutes: Routes = [
     MatTabsModule,
     MatInputModule,
     ReactiveFormsModule,
+    FormsModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

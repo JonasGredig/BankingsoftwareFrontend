@@ -4,6 +4,7 @@ import {Transaction} from '../../../shared/transaction';
 import {RestApiService} from '../../../shared/rest-api.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup} from '@angular/forms';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-payment',
@@ -15,15 +16,14 @@ export class PaymentComponent implements OnInit {
   accounts: Account[];
   newTransfer: Transaction = new Transaction();
   userId = 0;
-  paymentForm: FormGroup;
+  iban: string = "";
+  ibanTo: string = "";
+  amount: number = 0;
 
   constructor(private restApi: RestApiService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) {
-    this.newTransfer.ibanTo = '';
-    this.paymentForm = new FormGroup({
-      firstName: new FormControl()
-    });
+              private router: Router,
+              private _snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -36,11 +36,23 @@ export class PaymentComponent implements OnInit {
   }
 
   submitTransaction() {
-    this.newTransfer.transactionTime = new Date().toDateString() + ' ' + new Date().toTimeString();
     this.newTransfer.type = 'E';
     this.newTransfer.text = 'Transfer';
-    this.restApi.addTransaction(this.newTransfer);
+    this.newTransfer.iban = this.iban;
+    this.newTransfer.ibanTo = this.ibanTo;
+    this.newTransfer.amount = this.amount;
+    this.restApi.addTransaction(this.newTransfer).subscribe(transaction => {
+      this.openSnackBar("Transaction erfolgreich!", "");
+
+    });
     this.router.navigate(['/overview'], {queryParams: {userId: this.userId}});
+
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
 }

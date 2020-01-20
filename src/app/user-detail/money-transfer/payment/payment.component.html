@@ -1,9 +1,9 @@
 <mat-card>
-  <form class="example-form" [formGroup]="paymentForm" (ngSubmit)="submitTransaction()">
+  <form class="example-form" (ngSubmit)="submitTransaction()">
 
     <mat-form-field class="example-full-width">
       <mat-label>Von Konto auswählen</mat-label>
-      <mat-select [(value)]="newTransfer.iban">
+      <mat-select [(value)]="newTransfer.iban" [(ngModel)]="iban" [ngModelOptions]="{standalone: true}">
         <mat-option *ngFor="let account of accounts" [value]="account.iban">
           {{account.iban}}
         </mat-option>
@@ -11,11 +11,11 @@
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
-      <input matInput type="text" placeholder="An IBAN eingeben" [value]="newTransfer.ibanTo" value="CH">
+      <input matInput type="text" placeholder="An IBAN eingeben" [value]="newTransfer.ibanTo" [(ngModel)]="ibanTo" [ngModelOptions]="{standalone: true}" value="CH">
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
-      <input matInput type="number" placeholder="Betrag CHF" [valueAsNumber]="newTransfer.amount" value="0.00">
+      <input matInput type="number" placeholder="Betrag CHF" [valueAsNumber]="newTransfer.amount" [(ngModel)]="amount" [ngModelOptions]="{standalone: true}" value="CH" value="0.00">
     </mat-form-field>
 
     <button mat-raised-button color="primary" type="submit">Zahlung senden</button>
