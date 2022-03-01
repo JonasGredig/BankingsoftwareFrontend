@@ -1,5 +1,7 @@
 # BankingsoftwareFrontend
 
+This is a simple Demo projects for the preparation course of my final practical exam.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.21.
 
 ## Development server
